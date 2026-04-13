@@ -1,0 +1,11 @@
+{
+  "/airtable-token": {
+    "target": "https://airtable.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/airtable-token": "/oauth2/v1/token"
+    },
+    "logLevel": "debug"
+  }
+}

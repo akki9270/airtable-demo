@@ -1,0 +1,42 @@
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: sred
+
+  backend:
+    build:
+      context: ./server
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/sred
+      PORT: 3000
+    volumes:
+      - ./server/src:/app/src   # hot reload — ts-node-dev watches src/
+    depends_on:
+      - mongo
+
+  ui:
+    build:
+      context: ./ui
+    restart: unless-stopped
+    ports:
+      - "80:4200"
+    env_file:
+      - .env
+    environment:
+      BACKEND_URL: http://backend:3000
+    volumes:
+      - ./ui/src:/app/src       # hot reload — ng serve watches src/
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
