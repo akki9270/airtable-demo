@@ -2,6 +2,9 @@
   "name": "sred-task-server",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
@@ -17,7 +20,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
-    "@types/node": "^20.14.10",
+    "@types/node": "^22.0.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.3"
   }
